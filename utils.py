@@ -2,6 +2,7 @@ import os, json, logging
 from typing import List, Optional
 
 class QueueHandler(logging.Handler):
+    """Handler that puts logs into a queue for the GUI."""
     def __init__(self, q): super().__init__(); self.q = q
     def emit(self, record): self.q.put(self.format(record))
 
@@ -35,7 +36,7 @@ class FileValidator:
 
 class SettingsManager:
     FILE = "settings.json"
-
+    """THIS FILE GETS AUTO-GENERATED"""
     @classmethod
     def load(cls):
         if os.path.exists(cls.FILE):
@@ -45,3 +46,4 @@ class SettingsManager:
     @classmethod
     def save(cls, data: dict):
         with open(cls.FILE, "w") as f: json.dump(data, f, indent=4)
+
