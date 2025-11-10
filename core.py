@@ -5,6 +5,7 @@
 
 
     class BaseShredder(ABC):
+        """Base class for all shredding algorithms."""    
         def __init__(self, dry_run=False, logger=None):
             self.dry_run = dry_run
             self.logger = logger or logging.getLogger("ShredMaster")
@@ -20,6 +21,7 @@
                 self.logger.info(msg)
 
         def overwrite_file(self, filepath: str, secure_rename=False) -> bool:
+            """Overwrites a file securely using the configured patterns."""
             try:
                 if not os.path.exists(filepath):
                     self.log(f"File not found: {filepath}")
@@ -65,6 +67,7 @@
             os.fsync(file_obj.fileno())
 
         def _secure_rename(self, filepath: str) -> str:
+             """Rename file randomly before deletion."""
             dir_ = os.path.dirname(filepath)
             base = os.path.basename(filepath)
             randname = ''.join(secrets.choice("abcdefghijklmnopqrstuvwxyz0123456789") for _ in range(len(base)))
@@ -110,7 +113,7 @@
 
 
     class ShredMasterCore:
-
+        """Core shredder logic managing threads, cancellation, and progress."""
         def __init__(self, logger=None):
             self.logger = logger or logging.getLogger("ShredMaster")
             self.cancel_flag = threading.Event()
@@ -158,3 +161,4 @@
             elapsed = time.time() - start
             self.logger.info(f"Done: {success}/{total} files in {elapsed:.2f}s")
             return success, total, elapsed
+
