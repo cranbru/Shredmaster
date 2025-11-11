@@ -2,7 +2,7 @@
 
 A powerful, user-friendly desktop application for securely deleting files beyond recovery. ShredMaster overwrites your files multiple times with different patterns before deletion, making data recovery virtually impossible.
 
-![Demo Image](Shredmaster-demo.png)
+![Demo Image](https://raw.githubusercontent.com/cranbru/Shredmaster/main/Shredmaster-demo.png)
 
 ## Features
 
@@ -108,5 +108,6 @@ Example `settings.json`:
 - **SSD Limitations**: Modern SSDs with wear-leveling may not fully overwrite data. For maximum security on SSDs, use full-disk encryption.
 - **Backups**: Shredding doesn't affect backups or cloud copies of files.
 - **Test First**: Always use "Dry Run" mode first to verify you're shredding the correct files.
+
 
 
